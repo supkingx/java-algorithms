@@ -10,7 +10,8 @@ import java.util.Arrays;
  */
 public class QuickSort {
     public static void main(String[] args) {
-        int[] a = {30, 40, 60, 10, 20, 50};
+        int[] a = {30, 40, 60, 40, 20, 50};
+//        int[] a = {30, 40, 50, 60, 70, 80};
         System.out.println("before sort:" + Arrays.toString(a));
         quickSort(a, 0, a.length - 1);
         System.out.println("after  sort:" + Arrays.toString(a));
@@ -25,37 +26,35 @@ public class QuickSort {
      * right -- 数组的右边界(例如，排序截至到数组末尾，则r=a.length-1)
      */
     public static void quickSort(int[] a, int left, int right) {
-        if (left < right) {
-            int l = left;
-            int r = right;
-            // 取左边第一个数字为依据
-            int x = a[l];
-
-            while (l < r) {
-                // 找出右边第一个比x小的数字
-                while (l < r && a[r] > x) {
-                    r--;
-                }
-                // 将右边第一个比x小的数字赋值给左边的数字
-                if (l < r) {
-                    a[l++] = a[r];
-                }
-                // 找出左边第一个比x大的数字
-                while (l < r && a[l] < x) {
-                    l++;
-                }
-                // 将左边第一个比x大的数字赋值给右边的数字
-                if (l < r) {
-                    a[r--] = a[l];
-                }
-            }
-            // x放于之间
-            if (l < r) {
-                a[l] = x;
-            }
-            quickSort(a, left, l - 1);
-            quickSort(a, l + 1, right);
+        if (left > right) {
+            return;
         }
-
+        int l = left;
+        int r = right;
+        // 标准数
+        int x = a[l];
+        while (l < r) {
+            // 找出右边第一个比 x 小的数
+            while (l < r && a[r] >= x) {
+                --r;
+            }
+            if (l < r) {
+                a[l] = a[r];
+                ++l;
+            }
+            // 找出左边第一个比 x 大的数
+            while (l < r && a[l] < x) {
+                ++l;
+            }
+            if (l < r) {
+                a[r] = a[l];
+                --r;
+            }
+        }
+        a[l] = x;
+        //递归调用左半数组
+        quickSort(a, left, l - 1);
+        //递归调用右半数组
+        quickSort(a, l + 1, right);
     }
 }
