@@ -55,6 +55,7 @@ public class QuickSort {
 
         //递归调用左半数组
         quickSort(a, left, l - 1);
+
         //递归调用右半数组
         quickSort(a, l + 1, right);
     }
