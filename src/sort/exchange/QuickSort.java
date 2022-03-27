@@ -42,6 +42,7 @@ public class QuickSort {
                 a[l] = a[r];
                 ++l;
             }
+
             // 找出左边第一个比 x 大的数
             while (l < r && a[l] < x) {
                 ++l;
